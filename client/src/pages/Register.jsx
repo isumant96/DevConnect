@@ -1,0 +1,167 @@
+import { useState } from "react";
+import axios from "axios";
+
+function Register() {
+
+  const [formData, setFormData] = useState({
+
+    name: "",
+    email: "",
+    password: "",
+    role: "developer",
+
+  });
+
+  async function handleSubmit(event) {
+
+    event.preventDefault();
+
+    try {
+
+      const res = await axios.post(
+
+        "http://localhost:5000/api/auth/register",
+
+        formData
+
+      );
+
+      alert(res.data);
+
+      console.log(res.data);
+
+    }
+
+    catch (error) {
+
+      console.log(error);
+
+    }
+
+  }
+
+  function handleChange(event) {
+
+    setFormData({
+
+      ...formData,
+
+      [event.target.name]: event.target.value,
+
+    });
+
+  }
+
+  return (
+
+    <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
+
+      <div className="w-full max-w-md bg-gray-900 p-8 rounded-2xl shadow-lg">
+
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          Register
+        </h1>
+
+        <form className="space-y-5" onSubmit={handleSubmit}>
+
+          {/* Name */}
+          <div>
+
+            <label className="block mb-2 text-sm text-gray-300">
+              Name
+            </label>
+
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-black border border-gray-700 focus:outline-none focus:border-white"
+            />
+
+          </div>
+
+          {/* Email */}
+          <div>
+
+            <label className="block mb-2 text-sm text-gray-300">
+              Email
+            </label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-black border border-gray-700 focus:outline-none focus:border-white"
+            />
+
+          </div>
+
+          {/* Password */}
+          <div>
+
+            <label className="block mb-2 text-sm text-gray-300">
+              Password
+            </label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-black border border-gray-700 focus:outline-none focus:border-white"
+            />
+
+          </div>
+
+          {/* Role */}
+          <div>
+
+            <label className="block mb-2 text-sm text-gray-300">
+              Role
+            </label>
+
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg bg-black border border-gray-700 focus:outline-none focus:border-white"
+            >
+
+              <option value="developer">
+                Developer
+              </option>
+
+              <option value="recruiter">
+                Recruiter
+              </option>
+
+            </select>
+
+          </div>
+
+          {/* Button */}
+          <button
+            type="submit"
+            className="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-gray-200 transition"
+          >
+
+            Register
+
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  );
+
+}
+
+export default Register;
