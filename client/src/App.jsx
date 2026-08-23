@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import CreatePost from "./pages/CreatePost";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -35,6 +36,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/create-post"
+  element={
+    <ProtectedRoute>
+      <CreatePost />
+    </ProtectedRoute>
+  }
+/>
 
       </Routes>
 
@@ -43,5 +52,6 @@ function App() {
   );
 
 }
+
 
 export default App;

@@ -7,10 +7,11 @@ router.post("/create", async (req, res) => {
 
   try {
 
-    const { content } = req.body;
+    const { content , user} = req.body;
 
     const post = new Post({
       content,
+      user,
     });
 
     await post.save();
@@ -23,6 +24,16 @@ router.post("/create", async (req, res) => {
 
   }
 
+});
+// GET ALL POSTS
+router.get("/", async (req, res) => {
+  try {
+    const posts = await Post.find();
+
+    res.json(posts);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;
